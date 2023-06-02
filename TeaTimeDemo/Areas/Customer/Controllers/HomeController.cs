@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using TeaTimeDemo.Models;
 
-namespace TeaTimeDemo.Controllers
+namespace TeaTimeDemo.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
