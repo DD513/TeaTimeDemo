@@ -1,0 +1,45 @@
+﻿@model List<Product>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                產品清單
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> 新增產品
+            </a>
+        </div>
+    </div>
+    <!-- 本次修改部分-->
+    <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    產品名稱
+                </th>
+                <th>
+                    類別
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    價格
+                </th>
+                <th>
+                    備註
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
