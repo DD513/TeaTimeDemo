@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeaTimeDemo.DataAccess.Data;
 
@@ -10,9 +11,11 @@ using TeaTimeDemo.DataAccess.Data;
 namespace TeaTimeDemo.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230608070650_addImageUrlToProduct")]
+    partial class addImageUrlToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,13 +49,13 @@ namespace TeaTimeDemo.DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "果汁"
+                            Name = "茶飲"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "茶"
+                            Name = "水果茶"
                         },
                         new
                         {
@@ -103,31 +106,31 @@ namespace TeaTimeDemo.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Description = "天然果飲，迷人多變。",
+                            Description = "清爽又止渴",
                             ImageUrl = "",
-                            Name = "台灣水果茶",
-                            Price = 60.0,
+                            Name = "紅茶",
+                            Price = 30.0,
                             Size = "大杯"
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 2,
-                            Description = " 品鐵觀音，享人生的味道。",
+                            CategoryId = 1,
+                            Description = "回甘就像現泡",
                             ImageUrl = "",
-                            Name = "鐵觀音",
-                            Price = 35.0,
+                            Name = "綠茶",
+                            Price = 25.0,
                             Size = "中杯"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 3,
-                            Description = "用咖啡體悟悠閒時光。",
+                            CategoryId = 2,
+                            Description = "小小一杯，清涼一夏",
                             ImageUrl = "",
-                            Name = "冰美式咖啡",
+                            Name = "綠豆沙牛奶",
                             Price = 50.0,
-                            Size = "中杯"
+                            Size = "大杯"
                         });
                 });
 

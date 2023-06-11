@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TeaTimeDemo.DataAccess.Repository.IRepository;
 using TeaTimeDemo.Models;
 
 namespace TeaTimeDemo.Areas.Customer.Controllers
@@ -8,15 +9,22 @@ namespace TeaTimeDemo.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return View(productList);
+        }
+        public IActionResult Details(int productId)
+        {
+            Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category");
+            return View(product);
         }
 
         public IActionResult Privacy()
