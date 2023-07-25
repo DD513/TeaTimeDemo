@@ -1,0 +1,42 @@
+﻿<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                分店清單
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Store" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> 新增分店
+            </a>
+        </div>
+    </div>
+    <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    分店名稱
+                </th>
+                <th>
+                    地址
+                </th>
+                <th>
+                    城市
+                </th>
+                <th>
+                    電話號碼
+                </th>
+                <th>
+                    備註
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/store.js"></script>
+}
