@@ -10,6 +10,10 @@ namespace TeaTimeDemo.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        IStoreRepository Store { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        //本次新增部分
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

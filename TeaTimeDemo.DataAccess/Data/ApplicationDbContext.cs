@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TeaTimeDemo.Models;
 
 namespace TeaTimeDemo.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -11,10 +13,15 @@ namespace TeaTimeDemo.DataAccess.Data
         }
 
         public DbSet<Category> Categories { get; set; }
-        //本次新增部分
         public DbSet<Product> Products { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        //本次新增部分
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "果汁", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "茶", DisplayOrder = 2 },
