@@ -1,21 +1,23 @@
-﻿@model Product
+﻿@model ShoppingCart
 
 <form method="post">
+    <!-- 本次新增部分-->
+    <input hidden asp-for="ProductId" />
     <div class="container mt-5">
         <div class="row">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-7 col-lg-7">
                         <div class="row align-items-center">
-                            <div class="col-6"><h3 class="mb-0">@Model.Name</h3></div>
-                            <div class="col-6 text-end"><span class="badge bg-info"><h6 class="mb-0">@Model.Category.Name</h6></span></div>
+                            <div class="col-6"><h3 class="mb-0">@Model.Product.Name</h3></div>
+                            <div class="col-6 text-end"><span class="badge bg-info"><h6 class="mb-0">@Model.Product.Category.Name</h6></span></div>
                         </div>
 
                         <div class="row">
-                            <h5 class="pt-3">@Model.Size / <span class="text-danger fw-bold">@Model.Price.ToString("c")</span></h5>
+                            <h5 class="pt-3">@Model.Product.Size / <span class="text-danger fw-bold">@Model.Product.Price.ToString("c")</span></h5>
                         </div>
                         <div class="row">
-                            <h6 class="my-2">【@Model.Description】</h6>
+                            <h6 class="my-2">【@Model.Product.Description】</h6>
                         </div>
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
@@ -30,14 +32,14 @@
                                             <label class="form-check-label" for="regularIce">
                                                 正常冰 Regular Ice
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="regularIce" value="正常冰 regularIce" checked>
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="regularIce" value="正常冰 regularIce" checked>
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="lessIce">
                                                 少冰 Less Ice
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="lessIce" value="少冰 Less Ice">
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="lessIce" value="少冰 Less Ice">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
@@ -45,14 +47,14 @@
                                             <label class="form-check-label" for="easyIce">
                                                 微冰 Easy Ice
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="easyIce" value="微冰 Easy Ice">
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="easyIce" value="微冰 Easy Ice">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="iceFree">
                                                 去冰 Ice-Free
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="iceFree" value="去冰 Ice-Free">
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="iceFree" value="去冰 Ice-Free">
 
                                         </div>
                                         <hr />
@@ -60,14 +62,14 @@
                                             <label class="form-check-label" for="warm">
                                                 溫 Warm
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="warm" value="溫 Warm">
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="warm" value="溫 Warm">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="hot">
                                                 熱 Hot
                                             </label>
-                                            <input class="form-check-input" type="radio" name="ice" id="hot" value="熱 Hot">
+                                            <input asp-for="Ice" class="form-check-input" type="radio" name="ice" id="hot" value="熱 Hot">
                                         </div>
                                         <hr />
                                     </div>
@@ -85,35 +87,35 @@
                                             <label class="form-check-label" for="regularSugar">
                                                 正常甜 Regular Sugar
                                             </label>
-                                            <input class="form-check-input" type="radio" name="sweetness" id="regularSugar" value="正常甜 Regular Sugar" checked>
+                                            <input asp-for="Sweetness" class="form-check-input" type="radio" name="sweetness" id="regularSugar" value="正常甜 Regular Sugar" checked>
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="lessSugar">
                                                 少糖 Less Sugar
                                             </label>
-                                            <input class="form-check-input" type="radio" name="sweetness" id="lessSugar" value="少糖 Less Sugar">
+                                            <input asp-for="Sweetness" class="form-check-input" type="radio" name="sweetness" id="lessSugar" value="少糖 Less Sugar">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="halfSugar">
                                                 半糖 Half Sugar
                                             </label>
-                                            <input class="form-check-input" type="radio" name="sweetness" id="halfSugar" value="半糖 Half Sugar">
+                                            <input asp-for="Sweetness" class="form-check-input" type="radio" name="sweetness" id="halfSugar" value="半糖 Half Sugar">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="quarterSugar">
                                                 微糖 Quarter Sugar
                                             </label>
-                                            <input class="form-check-input" type="radio" name="sweetness" id="quarterSugar" value="微糖 Quarter Sugar">
+                                            <input asp-for="Sweetness" class="form-check-input" type="radio" name="sweetness" id="quarterSugar" value="微糖 Quarter Sugar">
                                         </div>
                                         <hr />
                                         <div class="form-check ps-1 my-3 d-flex justify-content-between">
                                             <label class="form-check-label" for="sugarFree">
                                                 無糖 Sugar-Free
                                             </label>
-                                            <input class="form-check-input" type="radio" name="sweetness" id="sugarFree" value="無糖 Sugar-Free">
+                                            <input asp-for="Sweetness" class="form-check-input" type="radio" name="sweetness" id="sugarFree" value="無糖 Sugar-Free">
                                         </div>
                                         <hr />
                                     </div>
@@ -127,14 +129,14 @@
                                 </h2>
                                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <input class="form-control mt-2" />
+                                        <input asp-for="Count" class="form-control mt-2" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-5 align-self-start">
-                        <img src="@Model.ImageUrl" width="100%" class="rounded" />
+                        <img src="@Model.Product.ImageUrl" width="100%" class="rounded" />
                     </div>
                 </div>
             </div>
