@@ -1,0 +1,158 @@
+﻿@model OrderVM
+@using TeaTimeDemo.Utility
+
+<form method="post">
+    <input asp-for="OrderHeader.Id" hidden />
+    <br />
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-dark text-light ml-0">
+                <div class="container row">
+                    <div class="col-12 d-none d-md-block col-md-6 p-2">
+                        <i class="fas fa-shopping-cart"></i> &nbsp; 訂單總計 Order Summary
+                    </div>
+                    <div class="col-12 col-md-4 offset-md-2 text-right p-2">
+                        <a asp-action="Index" class="btn btn-outline-info form-control btn-sm">回訂單列 Back to Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pb-4">
+                            <div class="row">
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-primary">訂購人資訊 PickUp Details:</span>
+                                </h4>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">姓名 Name</div>
+                                <div class="col-8">
+                                    @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Manager))
+                                    {
+                                        <input asp-for="OrderHeader.Name" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="OrderHeader.Name" readonly type="text" class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">手機 Phone</div>
+                                <div class="col-8">
+                                    @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Manager))
+                                    {
+                                        <input asp-for="OrderHeader.PhoneNumber" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="OrderHeader.PhoneNumber" readonly type="text" class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">地址 Address</div>
+                                <div class="col-8">
+                                    @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Manager))
+                                    {
+                                        <input asp-for="OrderHeader.Address" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Address" class="text-danger"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="OrderHeader.Address" readonly type="text" class="form-control" />
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row my-1">
+                                <div class="col-4">信箱 Email</div>
+                                <div class="col-8">
+                                    <input asp-for="OrderHeader.ApplicationUser.Email" readonly type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">訂購日期 Order Date</div>
+                                <div class="col-8">
+                                    <input value="@Model.OrderHeader.OrderDate.ToShortDateString()" type="text" class="form-control" readonly />
+                                </div>
+                            </div>
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Manager))
+                            {
+                                <button type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1">修改訂單資訊 Update Order Details</button>
+                            }
+                        </div>
+                        <div class="col-12 col-lg-5 offset-lg-1">
+                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-primary">訂購內容 Order Summary</span>
+                            </h4>
+                            <label class="btn btn-outline-primary form-control my-2">訂單狀態 Order Status - @Model.OrderHeader.OrderStatus</label>
+
+                            <ul class="list-group mb-3">
+                                @foreach (var detail in Model.OrderDetail)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between p-2">
+                                        <div class="row container">
+                                            <div class="col-8">
+
+                                                <h6 class="my-0 text-primary">@detail.Product.Name</h6>
+                                                <small class="text-muted">價格：@detail.Price.ToString("c")</small><br />
+                                                <small class="text-muted">數量：@detail.Count</small><br />
+                                                <small class="text-muted">甜度：@detail.sweetness</small><br />
+                                                <small class="text-muted">冰塊：@detail.Ice</small>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="text-success"> @((detail.Count * detail.Price).ToString("c"))</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                <li class="list-group-item bg-info">
+                                    <div class="row container">
+                                        <div class="col-6 text-center">
+                                            <h5 class="text-white">總計 TOTAL </h5>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <h5 class="text-white">@Model.OrderHeader.OrderTotal.ToString("c")</h5>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Manager))
+                            {
+                                @if (Model.OrderHeader.OrderStatus == SD.StatusPending)
+                                {
+                                    <button type="submit" asp-action="StartProcessing" class="btn btn-primary form-control my-1">接受訂單</button>
+                                }
+                                @if (Model.OrderHeader.OrderStatus == SD.StatusInProcess)
+                                {
+                                    <button type="submit" asp-action="OrderReady" class="btn btn-primary form-control my-1">製作完成(通知顧客取餐)</button>
+                                }
+                                @if (Model.OrderHeader.OrderStatus == SD.StatusReady)
+                                {
+                                    <button type="submit" asp-action="OrderCompleted" class="btn btn-success form-control my-1">確認付款(訂單完成)</button>
+                                }
+                                @if (Model.OrderHeader.OrderStatus != SD.StatusCompleted && Model.OrderHeader.OrderStatus != SD.StatusCancelled)
+                                {
+                                    <button type="submit" asp-action="CancelOrder" class="btn btn-danger form-control my-1">取消訂單</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+    </script>
+
+}
