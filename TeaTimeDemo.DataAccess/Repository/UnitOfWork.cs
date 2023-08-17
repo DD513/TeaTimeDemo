@@ -18,6 +18,9 @@ namespace TeaTimeDemo.DataAccess.Repository
         public IStoreRepository Store { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        // 本次新增部分
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IOrderDetailRepository OrderDetail { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -27,6 +30,9 @@ namespace TeaTimeDemo.DataAccess.Repository
             Store = new StoreRepository(_db);
             ShoppingCart = new ShoppingCartRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            // 本次新增部分
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetail = new OrderDetailRepository(_db);
         }
 
         public void Save()

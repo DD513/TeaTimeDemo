@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TeaTimeDemo.Models.ViewModels
 {
-    public class ShoppingCartVM
-    {
-        public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
-        // 本次修改部分
-        //public double OrderTotal { get; set; }
+	public class OrderVM
+	{
         public OrderHeader OrderHeader { get; set; }
+        public IEnumerable<OrderDetail> OrderDetail { get; set; }
     }
 }
