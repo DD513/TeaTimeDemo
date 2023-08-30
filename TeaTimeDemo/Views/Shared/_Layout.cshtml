@@ -28,7 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">訂單管理</a>
                         </li>
-                        @if (User.IsInRole(SD.Role_Admin))
+                        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Manager))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">內容管理</a>
@@ -37,12 +37,14 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">產品</a>
                                     <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Store" asp-action="Index">分店</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">建立使用者</a>
                                 </div>
                             </li>
                         }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                <i class="bi bi-cart"></i> &nbsp; (0)
+                                <i class="bi bi-cart"></i> &nbsp;
                             </a>
                         </li>
                     </ul>
